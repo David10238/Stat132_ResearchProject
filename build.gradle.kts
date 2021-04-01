@@ -1,7 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.31"
+    val kotlinVersion = "1.4.31"
+    kotlin("jvm") version kotlinVersion
 }
 
 group = "me.lukens"
@@ -13,6 +14,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test-junit"))
+    implementation("com.google.code.gson:gson:2.8.6")
 }
 
 tasks.test {

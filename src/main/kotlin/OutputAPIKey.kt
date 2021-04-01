@@ -1,4 +1,4 @@
 
 fun main(){
-    println(API.key)
+    println(API.KEY)
 }
