@@ -25,6 +25,3 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-
-### TOA API CODE ###
-apiCode.txt
