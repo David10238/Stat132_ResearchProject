@@ -45,6 +45,8 @@ object API {
     ////////////////////////////
     // functions to read from api
     ////////////////////////////
+    var lastPollTime = 0L
+    var throttleTime = 3000L
     fun getText(path:String):String{
         val request = HttpRequest.newBuilder()
             .GET()
@@ -53,6 +55,13 @@ object API {
             .setHeader("X-TOA-Key", KEY)
             .setHeader("X-Application-Origin", APP_NAME)
             .build()
+        while(true){
+            val time = System.currentTimeMillis()
+            if(time - lastPollTime > throttleTime) {
+                lastPollTime = time
+                break;
+            }
+        }
         val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
         return response.body()
     }

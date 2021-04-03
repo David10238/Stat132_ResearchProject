@@ -27,16 +27,21 @@ class Calculator {
 }
 
 fun main() {
+    val emptyKeys = arrayListOf<String>()
     val erroredKeys = arrayListOf<String>()
     val calculator = Calculator()
 
     val keys = API.getRR2EventKeys()
+
+    println(keys.size)
     keys.forEach { key ->
         // some keys give malformed JSON
         try {
             val rankings = API.getRankings(key)
             println(API.getRankings(key))
             rankings.forEach(calculator::pushData)
+            if(rankings.isEmpty())
+                emptyKeys.add(key)
         }
         catch (e:JsonSyntaxException){
             erroredKeys.add(key)
@@ -57,6 +62,8 @@ fun main() {
     numberWriter.close()
     digitWriter.close()
 
+    println("EmptyKeys")
+    println(emptyKeys)
+    println("ErroredKeys")
     println(erroredKeys)
-    erroredKeys.forEach(::println)
 }
