@@ -2,6 +2,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
+import com.google.gson.stream.JsonReader
 import java.io.File
 import java.net.URI
 import java.net.http.HttpClient
@@ -15,12 +16,16 @@ object API {
     ////////////////////////////
     fun getSeasons() = getListFromPath("seasons", Season::class.java)
 
+    fun getRR2Events() = getListFromPath("event?season_key=1819", Event::class.java)
+    fun getRR2EventKeys() = getRR2Events().map(Event::event_key)
+    fun getRankings(event_key:String) = getListFromPath("event/${event_key}/rankings", Ranking::class.java)
+
     ////////////////////////////
     // CONSTANTS
     ////////////////////////////
     private const val BASE_URL = "https://theorangealliance.org/api"
     private const val APP_NAME = "StatisticsProject"
-    const val RR2_KEY = 1819
+    const val RR2_KEY = "1819"
     val KEY by lazy{
         val stringBuilder = StringBuilder()
         val file = File("apiCode.txt")
