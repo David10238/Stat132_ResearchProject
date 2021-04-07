@@ -41,8 +41,8 @@ class TeamData(private val number: Int) {
 
     val average get() = averages.average().toInt()
 
-    val displayNumber get() = "$number $average"
-    val displayDigit get() = "${if (number < FIVE_DIGIT) "Four" else "Five"} $average"
+    val displayNumber get() = "$number\t$average"
+    val displayDigit get() = "${if (number < FIVE_DIGIT) "Four" else "Five"}\t$average"
 }
 
 val teamMap = LinkedHashMap<Int, TeamData>()
